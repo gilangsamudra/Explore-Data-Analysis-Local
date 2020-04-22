@@ -14,7 +14,7 @@ def compare_values(act_col, sat_col):
         act_vals.append(a_val)
     for s_val in sat_col:
         sat_vals.append(s_val)
-        
+
     print('Values in ACT only: ')
     for val_a in act_vals:
         if (val_a not in sat_vals):
@@ -25,6 +25,14 @@ def compare_values(act_col, sat_col):
         if (val_s not in sat_vals):
             print(val_s)
 
+
+def fix_participation(column):
+    return column.apply(lambda cells: cells.strip('%'))
+
+def convert_to_float(exam_df):
+    features = [col for col in exam_df.columns if col != 'State']
+    exam_df[features] = exam_df[features].astype(float)
+    return exam_df
 
 # Bagian 2 - Load the data
 sat_17 = pd.read_csv('D:/Phyton Code/Contoh dari Github/\
@@ -93,4 +101,13 @@ print('SAT 2018 column names = ', sat_18.columns, "\n")
 print('ACT 2017 column names = ', act_17.columns, "\n")
 print('ACT 2018 column names = ', act_18.columns, "\n")
 
-print(sat_17.isnull().sum())
+print('SAT 2017 Missing Data:', "\n", sat_17.isnull().sum(), '\n')
+print('SAT 2018 Missing Data:', "\n", sat_18.isnull().sum(), '\n')
+print('ACT 2017 Missing Data:', "\n", act_17.isnull().sum(), '\n')
+print('ACT 2018 Missing Data:', "\n", act_18.isnull().sum(), '\n')
+
+print('SAT 2017 Missing Data:', "\n", sat_17.dtypes, '\n')
+print('SAT 2018 Missing Data:', "\n", sat_18.dtypes, '\n')
+print('ACT 2017 Missing Data:', "\n", act_17.dtypes, '\n')
+print('ACT 2018 Missing Data:', "\n", act_18.dtypes, '\n')
+
