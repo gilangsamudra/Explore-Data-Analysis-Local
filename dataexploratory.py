@@ -58,9 +58,9 @@ print('ACT 2018 shape = ', act_18.shape)
 act_18['State'].value_counts()
 act_18[act_18['State'] == 'Maine']
 
-# drop the incorrect data
-act_18.drop(act_18.index[52], inplace=True)
-act_18 = act_18.reset_index(drop=True)
+# drop the incorrect data, drop a row
+act_18.drop(act_18.index[0], inplace=True)
+act_18.reset_index(drop=True, inplace=True)
 act_18.shape
 
 compare_values(act_17['State'], sat_17['State'])
@@ -68,16 +68,20 @@ compare_values(act_18['State'], sat_18['State'])
 
 act_17[act_17['State'] == 'National']
 act_17.drop(act_17.index[0], inplace=True)
-act_17 = act_17.reset_index(drop=True)
+act_17.reset_index(drop=True, inplace=True)
 act_17.shape
 
 act_18[act_18['State'] == 'National']
 act_18.drop(act_18.index[23], inplace=True)
-act_18 = act_18.reset_index(drop=True)
+act_18.reset_index(drop=True, inplace=True)
 act_18.shape
 
-act_18['State'].replace({'Washington, D.C.': 'District of Columbia'},
-                        inplace=True)
+# Ganti nama atau data menggunakan attribute replace
+act_18.replace({'State':{'Washington, D.C.': 'District of Columbia'}},
+               inplace=True)
+# #atau
+# act_18['State'].replace({'Washington, D.C.': 'District of Columbia'},
+#                         inplace=True)
 
 # final check of consistency
 print("FINAL CHECK ACT DATA \n")
